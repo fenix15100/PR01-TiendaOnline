@@ -7,39 +7,26 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Product extends Model
+class Category extends Model
 {
     use HasFactory;
 
-    protected  $table = 'products';
+    protected  $table = "categories";
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
     protected $fillable = [
-        'sku',
         'name',
-        'price',
         'description',
         'thumbnail',
-        'image',
-        'category',
-        'stock'
-
     ];
 
-    public function categories(): BelongsToMany
+    public function products(): BelongsToMany
     {
-        return $this->belongsToMany(Category::class);
-    }
-
-    /**
-     * @return HasMany
-     */
-    public function ordersLines(): HasMany
-    {
-        return $this->hasMany( 'App\OrderLine', 'id_product', 'id' );
+        return $this->belongsToMany(Product::class);
     }
 
 }
