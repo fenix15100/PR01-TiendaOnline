@@ -12,6 +12,10 @@ class OrderLine extends Model
 
     protected  $table = "orders_lines";
 
+    private float $price;
+    private string $sku;
+    private int $quanity;
+
     protected $fillable = [
         'price',
         'sku',
@@ -33,4 +37,67 @@ class OrderLine extends Model
     {
         return $this->hasOne( 'App\Order', 'id', 'id_order' );
     }
+
+    /**
+     * @param Product $product
+     * @return void
+     */
+    public function substractStock(Product $product): void
+    {
+
+        if ($product->getStock() === 0) return;
+        $product->setStock($product->getStock()-$this->getQuanity());
+        $product->save();
+
+    }
+
+    /**
+     * @return float
+     */
+    public function getPrice(): float
+    {
+        return $this->price;
+    }
+
+    /**
+     * @param float $price
+     */
+    public function setPrice(float $price): void
+    {
+        $this->price = $price;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSku(): string
+    {
+        return $this->sku;
+    }
+
+    /**
+     * @param string $sku
+     */
+    public function setSku(string $sku): void
+    {
+        $this->sku = $sku;
+    }
+
+    /**
+     * @return int
+     */
+    public function getQuanity(): int
+    {
+        return $this->quanity;
+    }
+
+    /**
+     * @param int $quanity
+     */
+    public function setQuanity(int $quanity): void
+    {
+        $this->quanity = $quanity;
+    }
+
+
 }
