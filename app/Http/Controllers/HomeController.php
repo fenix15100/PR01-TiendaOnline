@@ -20,6 +20,6 @@ class HomeController extends Controller
         $p2 = new \stdClass();
         $p2->title = "Producto 2";
         $p2->price = "40$";
-        return view('home',["product"=>[$p1,$p2]]);
+        return view('home.home',["product"=>[$p1,$p2]]);
     }
 }
