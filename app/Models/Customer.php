@@ -10,7 +10,7 @@ class Customer extends Model
 {
     use HasFactory;
     protected  $table = "customers";
-
+    private int $id;
     private string $email;
     private string $full_name;
     private string $billing_address;

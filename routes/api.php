@@ -21,6 +21,7 @@ Route::controller(CategoryController::class)->group(function () {
     Route::get('/category/{id}/products',[CategoryController::class, 'getProductsByCategory']);
     Route::post('/category',[CategoryController::class, 'create']);
     Route::put('/category/{id}',[CategoryController::class, 'update']);
+    Route::delete('/category/{id}',[CategoryController::class, 'delete']);
 
 });
 

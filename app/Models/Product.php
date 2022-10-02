@@ -12,7 +12,7 @@ class Product extends Model
     use HasFactory;
 
     protected  $table = 'products';
-
+    private int $id;
     private string $sku;
     private string $name;
     private float $price;

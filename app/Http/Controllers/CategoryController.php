@@ -21,25 +21,49 @@ class CategoryController extends Controller
 
     public function get( int $id): JsonResponse
     {
-        return new JsonResponse(Category::find($id),200);
+        if ($category = Category::query()->find($id)){
+            return new JsonResponse($category,200);
+        }else{
+            return new JsonResponse($category,404);
+        }
+
     }
 
     public function getProductsByCategory( int $id): view
     {
-        return view('product.productItem',["products" => Category::find($id)->products()]);
+        /** @var Category $category */
+        $category = Category::query()->find($id)->first();
+
+
+        return view('product.productItem',["products" => $category->products()]);
     }
 
     public function create(Request $request): JsonResponse
     {
         $category = new Category();
         $category->fill($request->all())->save();
-        $category = Category::find($category->id);
+        $category = Category::query()->find($category->getId());
         return new JsonResponse($category,201);
     }
     public function update(Request $request,int $id): JsonResponse
     {
-        $category = Category::find($id);
+        $category = Category::query()->find($id);
         $category->update($request->all());
         return new JsonResponse($category,200);
+    }
+
+
+    public function delete(int $id): JsonResponse
+    {
+        $result = Category::destroy($id);
+        if ($result){
+            return new JsonResponse(
+                ["message"=>"Categoria Eliminada",
+                 "id"=>$id
+                ],200);
+        }else{
+            return new JsonResponse(["message"=>"No se pudo eliminar la categoria"],404);
+        }
+
     }
 }

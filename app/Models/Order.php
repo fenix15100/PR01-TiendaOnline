@@ -12,7 +12,7 @@ class Order extends Model
     use HasFactory;
 
     protected  $table = "orders";
-
+    private int $id;
     private float $ammount;
     private string $shipping_address;
     private string $order_email;

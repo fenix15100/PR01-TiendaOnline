@@ -11,7 +11,7 @@ class OrderLine extends Model
     use HasFactory;
 
     protected  $table = "orders_lines";
-
+    private int $id;
     private float $price;
     private string $sku;
     private int $quanity;

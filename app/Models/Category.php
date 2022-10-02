@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+
 
 class Category extends Model
 {
@@ -12,6 +13,7 @@ class Category extends Model
 
     protected  $table = "categories";
 
+    private int $id;
     private string $name;
     private string $description;
     private string $thumbnail;
@@ -27,7 +29,8 @@ class Category extends Model
         'thumbnail',
     ];
 
-    public function products(): \Illuminate\Database\Eloquent\Collection
+
+    public function products(): Collection
     {
         return $this->belongsToMany(Product::class)->get();
     }
@@ -79,6 +82,15 @@ class Category extends Model
     {
         $this->thumbnail = $thumbnail;
     }
+
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
 
 
 
