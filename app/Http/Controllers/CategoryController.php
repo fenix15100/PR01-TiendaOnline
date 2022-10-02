@@ -29,7 +29,7 @@ class CategoryController extends Controller
 
     }
 
-    public function getProductsByCategory( int $id): view
+    public function getProductsByCategory( Request $request, int $id):view
     {
         /** @var Category $category */
         $category = Category::query()->find($id);
@@ -41,7 +41,6 @@ class CategoryController extends Controller
     {
         $category = new Category();
         $category->fill($request->all())->save();
-        $category = Category::query()->find($category->getId());
         return new JsonResponse($category,201);
     }
     public function update(Request $request,int $id): JsonResponse
