@@ -27,9 +27,9 @@ class Category extends Model
         'thumbnail',
     ];
 
-    public function products(): BelongsToMany
+    public function products(): \Illuminate\Database\Eloquent\Collection
     {
-        return $this->belongsToMany(Product::class);
+        return $this->belongsToMany(Product::class)->get();
     }
 
     /**

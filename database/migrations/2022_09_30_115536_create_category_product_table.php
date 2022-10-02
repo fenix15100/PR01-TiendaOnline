@@ -27,7 +27,7 @@ class CreateCategoryProductTable extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
-            $table->unique(['id_category', 'id_product']);
+            $table->unique(['category_id', 'product_id']);
 
 
         });
