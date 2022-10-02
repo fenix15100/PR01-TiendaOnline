@@ -32,8 +32,7 @@ class CategoryController extends Controller
     public function getProductsByCategory( int $id): view
     {
         /** @var Category $category */
-        $category = Category::query()->find($id)->first();
-
+        $category = Category::query()->find($id);
 
         return view('product.productItem',["products" => $category->products()]);
     }
