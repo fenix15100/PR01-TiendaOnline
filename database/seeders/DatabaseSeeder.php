@@ -33,7 +33,7 @@ class DatabaseSeeder extends Seeder
 
         $categories = Category::factory(5)->create();
 
-        $out->writeln('5 Categories created! '. $categories->toJson());
+        $out->writeln('5 Categories created! ');
 
 
         $product1 = new Product([
