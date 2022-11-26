@@ -7,10 +7,6 @@ use App\Models\Customer;
 use App\Models\Product;
 use Illuminate\Database\Seeder;
 use App\Models\User;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
@@ -57,7 +53,7 @@ class DatabaseSeeder extends Seeder
             'stock' => 3
         ]);
         $product2->save();
-        $product2->categories()->save($categories[2]);
+        $product2->categories()->save($categories[1]);
 
 
 
