@@ -14,5 +14,6 @@
 </section>
 @include('base.footer')
 @include('base.assetsjs')
+<script src="{{asset('js/category/category.js')}}"></script>
 </body>
 </html>

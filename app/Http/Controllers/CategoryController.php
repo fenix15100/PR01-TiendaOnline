@@ -60,7 +60,7 @@ class CategoryController extends Controller
                  "id"=>$id
                 ],200);
         }else{
-            return new JsonResponse(["message"=>"No se pudo eliminar la categoria"],404);
+            return new JsonResponse(["message"=>"No se pudo eliminar la categoria"],500);
         }
 
     }
