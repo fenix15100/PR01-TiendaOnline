@@ -29,7 +29,7 @@ class CategoryController extends Controller
 
     }
 
-    public function getProductsByCategory( Request $request, int $id):view
+    public function getProductsByCategory(int $id):view
     {
         /** @var Category $category */
         $category = Category::query()->find($id);

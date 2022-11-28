@@ -50,7 +50,7 @@
             </thead>
             <tbody>
             @foreach ($productos as $producto)
-                <tr id="data[product-{{$producto->id}}]">
+                <tr id="data[product-{{$producto->id}}-item]">
                     <th scope="row">{{$producto->id}}</th>
                     <td>{{$producto->name}}</td>
                     <td>{{$producto->description}}</td>
@@ -59,6 +59,8 @@
                     <td><img class="img-fluid" style="width: 150px" src="{{asset($producto->image)}}" alt="..." /></td>
                     <td>{{$producto->created_at}}</td>
                     <td>{{$producto->updated_at}}</td>
+                    <td><button id="product-{{$producto->id}}-delete" class="btn btn-danger">Eliminar</button></td>
+                    <td><button id="product-{{$producto->id}}-edit" class="btn btn-warning">Editar</button></td>
                 </tr>
             @endforeach
             </tbody>
