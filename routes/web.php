@@ -30,5 +30,17 @@ Route::get('/product/{id}/addProductToCart',[ProductController::class, 'addProdu
 Route::get('/product/{id}/removeProductCart',[ProductController::class, 'removeProductCart']);
 
 Route::get('/cart',function (){
-    dd(session("SESSION_CART"));
-});
+    if(!session()->has("SESSION_CART")){
+        $cart = [];
+    }
+    else{
+        $cart = session("SESSION_CART");
+    }
+
+    $totalPrice = 0.0;
+    foreach ($cart as $item){
+        $totalPrice+=$item->product->price;
+    }
+
+    return view('cart.cart',['cart'=>$cart,'totalPrice'=>$totalPrice]);
+})->name('cart');
