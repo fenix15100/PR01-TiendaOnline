@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Product;
+use App\Service\CartService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -75,6 +76,37 @@ class ProductController extends Controller
             return new JsonResponse(["message"=>"No se pudo eliminar el producto"],500);
         }
 
+    }
+
+    public function addProductToCart(Request $request,int $id,CartService $cartService): JsonResponse
+    {
+        $quantity = $request->query('quantity',null);
+        if ($quantity === null) return new JsonResponse(["message"=>"QueryParam quantity not suplied"],400);
+        $quantity = (int)$quantity;
+
+        /** @var Product $product */
+        $product = Product::query()->find($id);
+        if (!$product) return new JsonResponse(["message"=>"Product not found"],404);
+        if ($product->stock<$quantity) return new JsonResponse(["message"=>"No queda stock suficiente"],500);
+
+        if($cartService->addProductCart($id,$quantity)){
+            return new JsonResponse(["message"=>"Product added to Cart","cart"=>$cartService->getCart()],200);
+        }else{
+            return new JsonResponse(["message"=>"Product error adding to Cart"],500);
+        }
+    }
+
+    public function removeProductCart(int $id,CartService $cartService): JsonResponse
+    {
+        /** @var Product $product */
+        $product = Product::query()->find($id);
+        if (!$product) return new JsonResponse(["message"=>"Product not found"],404);
+
+        if($cartService->removeProductCart($id)){
+            return new JsonResponse(["message"=>"Product removed from Cart","cart"=>$cartService->getCart()],200);
+        }else{
+            return new JsonResponse(["message"=>"Product error removing from Cart"],500);
+        }
     }
 
 

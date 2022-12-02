@@ -31,6 +31,7 @@ document.addEventListener("DOMContentLoaded", async function() {
             case 'add':
                 let payload = {}
                 await addEntity(entity,payload)
+                break;
         }
 
     }
@@ -39,15 +40,17 @@ document.addEventListener("DOMContentLoaded", async function() {
         const request = await fetch(`http://127.0.0.1:8000/api/${entity}/${id}`,{
             method:"DELETE"
         });
+        let response = null;
         if (request.ok){
-            const response = await request.json();
+            response = await request.json();
             const entityNode = document.getElementById(`data[${entity}-${id}-item]`);
             entityNode.remove();
         }
         else {
-            const response = await request.json();
+            response = await request.json();
             console.log(JSON.stringify(response));
         }
+        await setFlashMessage(response);
 
     }
 
@@ -59,6 +62,18 @@ document.addEventListener("DOMContentLoaded", async function() {
     const addEntity = async (entity,payload)=>{
         console.log(`addEntity(${entity},${payload})`)
 
+    }
+
+    const setFlashMessage = (response)=>{
+        const alertNode = document.getElementById("flash")
+        alertNode.innerHTML = '';
+        alertNode.insertAdjacentHTML('afterbegin',JSON.stringify(response))
+        alertNode.style.display="block";
+
+        setTimeout(() => {
+            alertNode.style.display="none";
+            location.reload();
+            }, 2000);
     }
 
 });

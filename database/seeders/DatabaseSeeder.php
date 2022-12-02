@@ -38,7 +38,7 @@ class DatabaseSeeder extends Seeder
             'price' => 35.6,
             'description' => "Tacones de exclusivos de Zara color negro para Mujer",
             'image' => "storage/products/tacon-negro.jpg",
-            'stock' => 5
+            'stock' => 60
         ]);
         $product1->save();
         $product1->categories()->save($categories[0]);
@@ -50,7 +50,7 @@ class DatabaseSeeder extends Seeder
             'price' => 20.6,
             'description' => "Anorak Deportivo de color discreto",
             'image' => "storage/products/anorak-casual-jacket.jpg",
-            'stock' => 3
+            'stock' => 60
         ]);
         $product2->save();
         $product2->categories()->save($categories[1]);

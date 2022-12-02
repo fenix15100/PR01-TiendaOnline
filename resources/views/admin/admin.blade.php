@@ -6,6 +6,8 @@
 @include('base.header')
 <!-- Section-->
 <section class="py-5">
+    <div id="flash" class="alert alert-info" style="display: none" role="alert">
+    </div>
     <div class="container px-4 px-lg-5 mt-5">
         <h2>Categorias:</h2>
         <table id=category-table class="table table-hover table-responsive">

@@ -25,3 +25,10 @@ Route::get('/admin', [AdminController::class,'index'])
 
 Route::get('/product/{id}/show', [ProductController::class,'showDetail'])
     ->name('product.show');
+
+Route::get('/product/{id}/addProductToCart',[ProductController::class, 'addProductToCart']);
+Route::get('/product/{id}/removeProductCart',[ProductController::class, 'removeProductCart']);
+
+Route::get('/cart',function (){
+    dd(session("SESSION_CART"));
+});
