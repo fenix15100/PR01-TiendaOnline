@@ -3,8 +3,6 @@
 namespace App\Service;
 
 use App\Models\Product;
-use Illuminate\Support\Collection;
-use function Symfony\Component\Translation\t;
 
 class CartService
 {
@@ -73,7 +71,7 @@ class CartService
                     'quantity' => $quantity
                 ];
 
-                array_push($this->cart,$itemCart);
+                $this->cart[] = $itemCart;
             }
             session()->put("SESSION_CART",$this->cart);
             session()->save();
