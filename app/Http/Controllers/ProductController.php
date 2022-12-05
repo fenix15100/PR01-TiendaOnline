@@ -94,9 +94,15 @@ class ProductController extends Controller
         if ($product->stock<$quantity) return Redirect::back()->with('warning','Insufficient Stock');
 
         if($cartService->addProductCart($id,$quantity)){
+            if ($request->isXmlHttpRequest()){
+                return new JsonResponse(["message"=>"Product added to Cart"],200);
+            }
             return Redirect::back()->with('success','Product added to Cart');
 
         }else{
+            if ($request->isXmlHttpRequest()){
+                return new JsonResponse(["message"=>"Product error adding to Cart"],500);
+            }
             return Redirect::back()->with('error','Product error adding to Cart');
         }
     }

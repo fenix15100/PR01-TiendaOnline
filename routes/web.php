@@ -39,7 +39,7 @@ Route::get('/cart',function (){
 
     $totalPrice = 0.0;
     foreach ($cart as $item){
-        $totalPrice+=$item->product->price;
+        $totalPrice+=($item->product->price*$item->quantity);
     }
 
     return view('cart.cart',['cart'=>$cart,'totalPrice'=>$totalPrice]);
