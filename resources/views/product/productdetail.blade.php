@@ -40,15 +40,12 @@
                 <div class="col-auto">
                     <label for="cantidad" class="col-form-label">Cantidad:</label>
                 </div>
-                <div class="col-auto">
-                    <input type="number" id="cantidad" value="{{$quantity}}" class="form-control form-control-sm"  min="0" max="{{$p->stock}}">
-                </div>
             </div>
 
             <!-- Product actions-->
             @if($p->stock != 0)
                 <br/>
-                <div class="text-start"><a id="addTocart" class="btn btn-outline-dark mt-auto" href="">Add to cart</a></div>
+                <div class="text-start"><a id="addTocart" class="btn btn-outline-dark mt-auto" href="{{route("addProductToCart",['id'=>$p->id,'quantity'=>1])}}">Add to cart</a></div>
             @else
                 <br/>
                 <div id="addTocart" class="text-start disabled"><a class="btn btn-danger disabled mt-auto" href="#">Add to cart</a></div>

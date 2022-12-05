@@ -20,13 +20,7 @@ class ProductController extends Controller
 
     public function showDetail(int $id, CartService $cartService): View
     {
-        if ($key = $cartService->IsProductInCart($id)!== null){
-            $itemCart = $cartService->getCart()[$key];
-            return view('product.productdetail',
-                ["p"=>Product::query()->find($id), 'quantity'=>$itemCart->quantity]);
-
-        }
-        return view('product.productdetail',["p"=>Product::query()->find($id),'quantity'=>0]);
+        return view('product.productdetail',["p"=>Product::query()->find($id)]);
     }
 
     /**

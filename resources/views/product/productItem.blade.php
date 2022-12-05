@@ -30,7 +30,7 @@
             <!-- Product actions-->
             @if($p->stock != 0)
                 <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                    <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+                    <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{{route("addProductToCart",['id'=>$p->id,'quantity'=>1])}}">Add to cart</a></div>
                 </div>
             @else
                 <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
