@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class OrderLine extends Model
@@ -19,33 +20,21 @@ class OrderLine extends Model
     ];
 
     /**
-     * @return HasOne
+     * @return BelongsTo
      */
-    public function product(): HasOne
+    public function product(): BelongsTo
     {
-        return $this->hasOne( 'App\Product', 'id', 'id_product' );
+        return $this->belongsTo( 'App\Models\Product', 'id_product', 'id' );
     }
 
     /**
-     * @return HasOne
+     * @return BelongsTo
      */
-    public function order(): HasOne
+    public function order(): BelongsTo
     {
-        return $this->hasOne( 'App\Order', 'id', 'id_order' );
+        return $this->belongsTo( 'App\Models\Order', 'id_order', 'id' );
     }
 
-    /**
-     * @param Product $product
-     * @return void
-     */
-    public function substractStock(Product $product): void
-    {
-
-        if ($product->stock === 0) return;
-        $product->stock = ($product->stock - $this->quantity);
-        $product->save();
-
-    }
 
 
 

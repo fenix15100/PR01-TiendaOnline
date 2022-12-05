@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -44,3 +45,5 @@ Route::get('/cart',function (){
 
     return view('cart.cart',['cart'=>$cart,'totalPrice'=>$totalPrice]);
 })->name('cart');
+
+Route::post('/order',[OrderController::class,'create'])->name('order.create');

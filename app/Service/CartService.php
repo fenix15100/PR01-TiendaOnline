@@ -105,6 +105,12 @@ class CartService
 
     }
 
+    public function clearCart(){
+        $this->cart = [];
+        session()->put("SESSION_CART",$this->cart);
+        session()->save();
+    }
+
 
 
 

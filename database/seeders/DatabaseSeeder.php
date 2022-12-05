@@ -24,9 +24,6 @@ class DatabaseSeeder extends Seeder
         $out->writeln("Username=email (del usuario creado)");
         $out->writeln("password=password (literalmente)");
 
-        $customers = Customer::factory(5)->create();
-        $out->writeln('5 Customers created! ');
-
         $categories = Category::factory(5)->create();
 
         $out->writeln('5 Categories created! ');

@@ -29,7 +29,7 @@
                         <td>{{$categoria->created_at}}</td>
                         <td>{{$categoria->updated_at}}</td>
                         <td><button id="category-{{$categoria->id}}-delete" class="btn btn-danger">Eliminar</button></td>
-                        <td><button id="category-{{$categoria->id}}-edit" class="btn btn-warning">Editar</button></td>
+                        <td><button disabled id="category-{{$categoria->id}}-edit" class="btn btn-warning">Editar</button></td>
                     </tr>
                 @endforeach
             </tbody>
@@ -62,44 +62,13 @@
                     <td>{{$producto->created_at}}</td>
                     <td>{{$producto->updated_at}}</td>
                     <td><button id="product-{{$producto->id}}-delete" class="btn btn-danger">Eliminar</button></td>
-                    <td><button id="product-{{$producto->id}}-edit" class="btn btn-warning">Editar</button></td>
+                    <td><button disabled id="product-{{$producto->id}}-edit" class="btn btn-warning">Editar</button></td>
                 </tr>
             @endforeach
             </tbody>
         </table>
         {{ $productos->links() }}
         <br/>
-        <h2>Clientes:</h2>
-        <table class="table table-hover table-responsive">
-            <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Name</th>
-                <th scope="col">Description</th>
-                <th scope="col">Price</th>
-                <th scope="col">Stock</th>
-                <th scope="col">Image</th>
-                <th scope="col">created_at</th>
-                <th scope="col">update_at</th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach ($clientes as $cliente)
-                <tr id="data[customer-{{$cliente->id}}]">
-                    <th scope="row">{{$cliente->id}}</th>
-                    <td>{{$cliente->full_name}}</td>
-                    <td>{{$cliente->email}}</td>
-                    <td>{{$cliente->billing_address}}</td>
-                    <td>{{$cliente->country}}</td>
-                    <td>{{$cliente->phone}}</td>
-                    <td>{{$cliente->created_at}}</td>
-                    <td>{{$cliente->updated_at}}</td>
-                </tr>
-            @endforeach
-            </tbody>
-        </table>
-        {{ $clientes->links() }}
-
     </div>
 </section>
 

@@ -19,23 +19,19 @@ class Order extends Model
         'shipping_address',
         'order_email',
         'order_date',
-        'order_status'
+        'order_status',
+        'full_name',
+        'billing_address',
+        'country',
+        'phone'
     ];
-
-    /**
-     * @return HasOne
-     */
-    public function customer(): HasOne
-    {
-        return $this->hasOne( 'App\Customer', 'id', 'id_customer' );
-    }
 
     /**
      * @return HasMany
      */
     public function ordersLines(): HasMany
     {
-        return $this->hasMany( 'App\OrderLine', 'id_order', 'id' );
+        return $this->hasMany( 'App\Models\OrderLine', 'id_order', 'id' );
     }
 
 

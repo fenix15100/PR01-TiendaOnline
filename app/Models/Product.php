@@ -42,7 +42,7 @@ class Product extends Model
      */
     public function ordersLines(): HasMany
     {
-        return $this->hasMany( 'App\OrderLine', 'id_product', 'id' );
+        return $this->hasMany( 'App\Models\OrderLine', 'id', 'id_product' );
     }
 
 

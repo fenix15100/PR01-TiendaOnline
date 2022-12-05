@@ -25,9 +25,10 @@
 
                                             <div class="col-md-2 col-lg-2 col-xl-2">
 
-                                                <img
+                                                <a href="{{route('product.show',['id'=>$item->productId])}}"><img
                                                     src="{{asset($item->product->image)}}"
                                                     class="img-fluid rounded-3" alt="ropa">
+                                                </a>
                                             </div>
                                             <div class="col-md-3 col-lg-3 col-xl-3">
                                                 <h6 class="text-black mb-0">{{$item->product->name}}</h6>
@@ -76,24 +77,42 @@
                                         </select>
                                     </div>
 
-                                    <h5 class="text-uppercase mb-3">Give code</h5>
-
-                                    <div class="mb-5">
-                                        <div class="form-outline">
-                                            <input type="text" id="form3Examplea2" class="form-control form-control-lg" />
-                                            <label class="form-label" for="form3Examplea2">Enter your code</label>
-                                        </div>
-                                    </div>
-
                                     <hr class="my-4">
 
                                     <div class="d-flex justify-content-between mb-5">
                                         <h5 class="text-uppercase">Total price</h5>
-                                        <h5>€ {{$totalPrice+5}}</h5>
+                                        <h5 id="totalPrice">€ {{$totalPrice+5}}</h5>
                                     </div>
-
-                                    <button type="button" class="btn btn-dark btn-block btn-lg"
-                                            data-mdb-ripple-color="dark">Checkout</button>
+                                    <h5 class="text-uppercase mb-3">Billing Details:</h5>
+                                    <form id="checkout">
+                                        <input id=csrf type="hidden" name="_token" value="{{ csrf_token() }}" />
+                                        <div class="mb-3">
+                                            <label for="fullName" class="form-label">Full Name</label>
+                                            <input type="text"  required class="form-control" id="fullName" aria-describedby="fullNameHelp">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="email" class="form-label">Email address</label>
+                                            <input type="email" required class="form-control" id="email">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="billingAddress">Billing Adress</label>
+                                            <input type="text"  required class="form-control" id="billingAddress">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="shippingAddress">Shipping Adress</label>
+                                            <input type="text" required class="form-control" id="shippingAddress">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="country">Country</label>
+                                            <input type="text"  required class="form-control" id="country">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="phone">Phone</label>
+                                            <input type="tel" class="form-control" id="phone">
+                                        </div>
+                                        <button type="submit" class="btn btn-dark btn-block btn-lg checkout"
+                                                data-mdb-ripple-color="dark">Checkout</button>
+                                    </form>
 
                                 </div>
                             </div>

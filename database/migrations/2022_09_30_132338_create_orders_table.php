@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class CreateOrdersTable extends Migration
@@ -18,7 +19,7 @@ class CreateOrdersTable extends Migration
             $table->float('ammount',6,2);
             $table->string('shipping_address',450);
             $table->string('order_email',256);
-            $table->dateTime('order_date');
+            $table->dateTime('order_date')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->enum('order_status',
                 ['BILLING_PENDING',
                 'PENDING',
@@ -26,12 +27,12 @@ class CreateOrdersTable extends Migration
                 'CANCELED',
                 'FAILED',
                 'REFUND']
-            );
+            )->default("PENDING");
+            $table->string('full_name',150)->nullable();
+            $table->string('billing_address',450);
+            $table->string('country',100)->nullable();
+            $table->string('phone',30)->nullable();
             $table->timestamps();
-            $table->foreignId('id_customer')->nullable()
-                ->constrained('customers')
-                ->onUpdate('cascade')
-                ->onDelete('set null');
         });
     }
 
