@@ -26,8 +26,8 @@ Route::get('/admin', [AdminController::class,'index'])
 Route::get('/product/{id}/show', [ProductController::class,'showDetail'])
     ->name('product.show');
 
-Route::get('/product/{id}/addProductToCart',[ProductController::class, 'addProductToCart']);
-Route::get('/product/{id}/removeProductCart',[ProductController::class, 'removeProductCart']);
+Route::get('/product/{id}/addProductToCart',[ProductController::class, 'addProductToCart'])->name('addProductToCart');
+Route::get('/product/{id}/removeProductCart',[ProductController::class, 'removeProductCart'])->name('removeProductCart');
 
 Route::get('/cart',function (){
     if(!session()->has("SESSION_CART")){

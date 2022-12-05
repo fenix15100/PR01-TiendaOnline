@@ -6,6 +6,7 @@ use App\Service\CartService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class ProductController extends Controller
 {
@@ -13,11 +14,19 @@ class ProductController extends Controller
      * Display a listing of the resource.
      *
      * @param int $id
+     * @param CartService $cartService
      * @return View
      */
-    public function showDetail(int $id): View
+
+    public function showDetail(int $id, CartService $cartService): View
     {
-        return view('product.productdetail',["p"=>Product::query()->find($id)]);
+        if ($key = $cartService->IsProductInCart($id)!== null){
+            $itemCart = $cartService->getCart()[$key];
+            return view('product.productdetail',
+                ["p"=>Product::query()->find($id), 'quantity'=>$itemCart->quantity]);
+
+        }
+        return view('product.productdetail',["p"=>Product::query()->find($id),'quantity'=>0]);
     }
 
     /**
@@ -78,7 +87,7 @@ class ProductController extends Controller
 
     }
 
-    public function addProductToCart(Request $request,int $id,CartService $cartService): JsonResponse
+    public function addProductToCart(Request $request,int $id,CartService $cartService)
     {
         $quantity = $request->query('quantity',null);
         if ($quantity === null) return new JsonResponse(["message"=>"QueryParam quantity not suplied"],400);
@@ -86,13 +95,15 @@ class ProductController extends Controller
 
         /** @var Product $product */
         $product = Product::query()->find($id);
-        if (!$product) return new JsonResponse(["message"=>"Product not found"],404);
-        if ($product->stock<$quantity) return new JsonResponse(["message"=>"No queda stock suficiente"],500);
+
+        if (!$product) return Redirect::back()->with('error','Product not found in DB');
+        if ($product->stock<$quantity) return Redirect::back()->with('warning','Insufficient Stock');
 
         if($cartService->addProductCart($id,$quantity)){
-            return new JsonResponse(["message"=>"Product added to Cart","cart"=>$cartService->getCart()],200);
+            return Redirect::back()->with('success','Product added to Cart');
+
         }else{
-            return new JsonResponse(["message"=>"Product error adding to Cart"],500);
+            return Redirect::back()->with('error','Product error adding to Cart');
         }
     }
 

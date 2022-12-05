@@ -5,7 +5,7 @@
 @include('base.navbar')
 @include('base.header')
 <!-- Section-->
-
+@include('base.messages')
 <div id="data[products-container]" class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-start">
     <div class="col mb-5 p-3">
         <div class="card h-100">
@@ -41,17 +41,17 @@
                     <label for="cantidad" class="col-form-label">Cantidad:</label>
                 </div>
                 <div class="col-auto">
-                    <input type="number" id="cantidad" class="form-control" aria-describedby="cantidad" min="0" max="{{$p->stock}}">
+                    <input type="number" id="cantidad" value="{{$quantity}}" class="form-control form-control-sm"  min="0" max="{{$p->stock}}">
                 </div>
             </div>
 
             <!-- Product actions-->
             @if($p->stock != 0)
                 <br/>
-                <div class="text-start"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+                <div class="text-start"><a id="addTocart" class="btn btn-outline-dark mt-auto" href="">Add to cart</a></div>
             @else
                 <br/>
-                <div class="text-start disabled"><a class="btn btn-danger disabled mt-auto" href="#">Add to cart</a></div>
+                <div id="addTocart" class="text-start disabled"><a class="btn btn-danger disabled mt-auto" href="#">Add to cart</a></div>
             @endif
 
         </div>
@@ -60,5 +60,16 @@
 </div>
 
 @include('base.footer')
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        let cantidad = document.getElementById("cantidad");
+
+        cantidad.addEventListener("keyup", (event)=>{
+            cantidad.nodeValue = event.target.value
+            document.getElementById("addTocart").href =
+                "{{route("addProductToCart",['id'=>$p->id])."?quantity="}}"+event.target.value
+        });
+    });
+</script>
 </body>
 </html>
