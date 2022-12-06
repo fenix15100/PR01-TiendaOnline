@@ -54,7 +54,7 @@ class OrderController extends Controller
 
         $cartService->clearCart();
 
-        return new JsonResponse($order,201);
+        return new JsonResponse(['order'=>$order,"message"=>"Compra realizada correctamente"],201);
     }
 
     public function delete(int $id): JsonResponse
