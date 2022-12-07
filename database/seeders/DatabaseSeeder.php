@@ -21,12 +21,30 @@ class DatabaseSeeder extends Seeder
 
         $admin = User::factory(1)->create()->first;
         $out->writeln('Admin User created: '.$admin->toJson());
-        $out->writeln("Username=email (del usuario creado)");
+        $out->writeln("Username=admin@admin.com");
         $out->writeln("password=password (literalmente)");
 
-        $categories = Category::factory(5)->create();
+        $category1 = new Category([
+            'name' => "Zapatos",
+            'description' => "Todo tipo de Zapatos"
+        ]);
 
-        $out->writeln('5 Categories created! ');
+        $category2 = new Category([
+            'name' => "Chaquetas",
+            'description' => "Todo tipo de Chaquetas"
+        ]);
+
+
+        $category3 = new Category([
+            'name' => "Ofertas de Navidad",
+            'description' => "Todo tipo de Ofertas de Navidad"
+        ]);
+
+        $category1->save();
+        $category2->save();
+        $category3->save();
+
+        $out->writeln('3 Categories created! ');
 
 
         $product1 = new Product([
@@ -38,19 +56,32 @@ class DatabaseSeeder extends Seeder
             'stock' => 60
         ]);
         $product1->save();
-        $product1->categories()->save($categories[0]);
-
+        $product1->categories()->saveMany([$category1,$category3]);
 
         $product2 = new Product([
+            'sku' => "Shoes-Black-Men-US45",
+            'name' => "Zapato de vestir hombre",
+            'price' => 50.6,
+            'description' => "Zapato de vestir para hombre de color negro",
+            'image' => "storage/products/zapato-hombre.png",
+            'stock' => 30
+        ]);
+        $product2->save();
+        $product2->categories()->save($category1);
+
+
+        $product3 = new Product([
             'sku' => "Anorak-Beige-XXL",
             'name' => "Anorak de Deporte",
             'price' => 20.6,
             'description' => "Anorak Deportivo de color discreto",
             'image' => "storage/products/anorak-casual-jacket.jpg",
-            'stock' => 60
+            'stock' => 25
         ]);
-        $product2->save();
-        $product2->categories()->save($categories[1]);
+        $product3->save();
+        $product3->categories()->saveMany([$category2,$category3]);
+
+
 
 
 

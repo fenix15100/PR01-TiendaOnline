@@ -32,9 +32,10 @@
                                             </div>
                                             <div class="col-md-3 col-lg-3 col-xl-3">
                                                 <h6 class="text-black mb-0">{{$item->product->name}}</h6>
+                                                <h6 class="text-muted mb-0">Stock disponible: {{$item->product->stock-1}}</h6>
                                             </div>
                                             <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
-                                                <input id="{{$item->productId}}-quantity" min="0" name="quantity" value="{{$item->quantity}}" type="number"
+                                                <input id="{{$item->productId}}-quantity" min="1" max="{{$item->product->stock}}" name="quantity" value="{{$item->quantity}}" type="number"
                                                        class="form-control form-control-sm" />
                                                 <img id="{{$item->productId}}-reload" src="{{asset('storage/cart/reload.png')}}" class="reload img-thumbnail img-fluid" width="25%" height="25%" style="margin-left: 5px">
 
