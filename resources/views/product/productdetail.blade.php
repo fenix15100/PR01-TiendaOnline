@@ -36,11 +36,6 @@
             <!-- Product price-->
             <span class="text-black h1">{{$p->price}}€</span>
 
-            <div class="row g-3 align-items-center">
-                <div class="col-auto">
-                    <label for="cantidad" class="col-form-label">Cantidad:</label>
-                </div>
-            </div>
 
             <!-- Product actions-->
             @if($p->stock != 0)

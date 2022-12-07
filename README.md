@@ -1,64 +1,56 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+## Puesta en Marcha del proyecto
+###Version de PHP utilizada:
+php -v
+PHP 7.4.28 (cli) (built: Feb 24 2022 02:16:32) ( ZTS Visual C++ 2017 x64 )
+Copyright (c) The PHP Group
+Zend Engine v3.4.0, Copyright (c) Zend Technologies
+with Xdebug v3.1.5, Copyright (c) 2002-2022, by Derick Rethans
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+### Instalacion de gestor de dependencias Composer:
+https://getcomposer.org/download/
 
-## About Laravel
+Windows Installer:
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+The installer - which requires that you have PHP already installed - will download Composer for you and set up your PATH environment variable so you can simply call composer from any directory.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Download and run https://getcomposer.org/Composer-Setup.exe - it will install the latest composer version whenever it is executed.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Puesta en Marcha
 
-## Learning Laravel
+- Crear la base de datos "tiendaonline" en mysql
+- La aplicacion espera que las credenciales de la base de datos sean "root" 1234
+pero pueden ser seteadas otras en el fichero .env del proyecto.
+  DB_CONNECTION=mysql
+  DB_HOST=127.0.0.1
+  DB_PORT=3306
+  DB_DATABASE=tiendaonline
+  DB_USERNAME=root
+  DB_PASSWORD=1234
+- Ejecutar dentro del proyecto los siguientes comandos: 
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+``composer install`` (Instala la dependencias del proyecto laravel)
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+``php artisan storage:link`` (Crea un enlace simbolico de la carpeta uploads hacia la carpeta public !importante hacerlo)
 
-## Laravel Sponsors
+``php artisan migrate:refresh`` (Crea el schema en la base de datos)
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+``php artisan db:seed``  (Rellena con datos la base de datos (./database/seeders/DatabaseSeeder.php)
 
-### Premium Partners
+``php artisan serve`` (Levanta la aplicacion sobre 127.0.0.1:8080)
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+### Datos a tener en cuenta:
+Para acceder al panel de administracion de la tienda 127.0.0.1:8080/admin
+es necesario utilizar las credenciales : admin@admin.com - password (literalmente la palabra password)
 
-## Contributing
+Una vez creado el entorno por primera vez si se quiere resetear solo la base de datos ejecutar solo:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+``php artisan migrate:refresh`` (Crea el schema en la base de datos)
 
-## Code of Conduct
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+``php artisan db:seed``  (Rellena con datos la base de datos (./database/seeders/DatabaseSeeder.php)
 
-## Security Vulnerabilities
+Si tuvieras cualquier problema poniendo en marcha la aplicación, por favor ponte en contacto conmigo via email fcamachomaya@uoc.edu
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+  
+    
