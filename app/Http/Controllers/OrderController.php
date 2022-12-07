@@ -3,12 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
-use App\Models\Product;
 use App\Service\CartService;
 use App\Models\OrderLine;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Contracts\View\View;
 
 class OrderController extends Controller
 {
